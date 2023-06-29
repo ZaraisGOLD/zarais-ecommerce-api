@@ -39,8 +39,8 @@ test("POST -> 'URL_BASE', ahould return status code 201 and res.body.firstName =
     const res = await request(app)
         .post(BASE_URL)
         .send(userCreate)
+        
     userId = res.body.id
-    console.log(res.body);
     expect(res.status).toBe(201)
     expect(res.body.firstName).toBe(userCreate.firstName)
 });
