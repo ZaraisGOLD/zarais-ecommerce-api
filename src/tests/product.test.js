@@ -47,9 +47,18 @@ test("POST -> 'BASE_URL', should return status code 201 and res.body.title === b
     expect(res.body.title).toBe(product.title)
 })
 
-test("GET -> 'BASE_URL', should return status code 200 and res.body.length === 1", async () => {
+test("GET -> 'BASE_URL', should return status code 200, res.body.length === 1 and res.body[0] to be defined", async () => {
     const res =await request(app)
         .get(BASE_URL_PRODUCTS)
+    
+    expect(res.status).toBe(200)
+    expect(res.body).toHaveLength(1)
+    expect(res.body[0]).toBeDefined()
+})
+
+test("GET -> 'BASE_URL_PRODUCTS?category = category.id', should return status code 200, res.body.length === 1 and res.body[0] to be defined", async () => {
+    const res =await request(app)
+        .get(`${BASE_URL_PRODUCTS}?category=${category.id}`)
     
     expect(res.status).toBe(200)
     expect(res.body).toHaveLength(1)
